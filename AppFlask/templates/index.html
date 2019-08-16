@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
-
+{% block scripts %}
+    <script type="text/javascript">
+        let btn_check = document.getElementById('btnCheck');
+        btn_check.addEventListener('click', (event) => {
+            let lista = document.querySelectorAll('table.table input[type="checkbox"]:checked');
+            console.log(lista);
+        });
+    </script>
+{% endblock %}
 {% block content %}
 
 <div class="jumbotron">
@@ -25,14 +33,19 @@
     </div>
     <div class="col-md-4">
         <p>CONSULTA A BASE DE DATOS</p>
+        <button type="button" id="btnCheck">
+            verificar
+        </button>
         <table class="table table-condensed table-border">
             <tr>
+                <th>Checks</th>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
             </tr>
             {% for n in lista %}
             <tr>
+                <td><input type="checkbox" /></td>
                 <td>{{ n.federation_id }}</td>
                 <td>{{ n.name }}</td>
                 <td>{{ n.email }}</td>
