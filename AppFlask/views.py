@@ -14,6 +14,17 @@ from flask import send_file
 import numpy as np
 import cv2
 
+def read_file(request, process):
+    files = request.files
+    if len(files) > 0:       
+        file = files.get('file')
+        if file.filename.endswith('.jpg'):            
+            return (True, process(file))
+        else:
+            return (False,'el tipo de archivo debe ser jpg')
+    else:
+        return 'no ha cargado ningun archivo'
+
 @app.route('/')
 @app.route('/home')
 def home():
@@ -33,6 +44,45 @@ def contact():
         title='Contact',
         year=datetime.now().year,
         message='Your contact page.'
+    )
+
+@app.route('/readnet', methods=['POST'])
+def readnet():
+    def process(file):
+        cv2.dnn.readNet('frozen_east_text_detection.pb')
+        # load the input image and grab the image dimensions
+        img = Image.open(file.stream)           
+        npa = np.array(img)        
+        #image = cv2.imread(args["image"])
+        #orig = image.copy()
+        #(H, W) = image.shape[:2]
+ 
+        # set the new width and height and then determine the ratio in change
+        # for both the width and height
+        #(newW, newH) = (args["width"], args["height"])
+        #rW = W / float(newW)
+        #rH = H / float(newH)
+ 
+        # resize the image and grab the new image dimensions
+        npa = cv2.resize(npa, (int(img.size[0]/float(32)*32), int(img.size[1]/float(32)*32)))
+        return Image.fromarray(npa)
+        #(H, W) = image.shape[:2]
+    #blob = cv2.dnn.blobFromImage(frame, 1.0, (inpWidth, inpHeight), (123.68, 116.78, 103.94), True, False)
+    #outputLayers = []
+    #outputLayers.append("feature_fusion/Conv_7/Sigmoid")
+    #outputLayers.append("feature_fusion/concat_3")
+    status = read_file(request, process)
+    if status[0]:
+        img_io = BytesIO()
+        status[1].save(img_io, 'JPEG', quality=70)
+        img_io.seek(0)
+        return send_file(img_io, mimetype='image/jpeg')
+    return render_template(
+        'index.html',
+        title='NETWORK',
+        year=datetime.now().year,
+        lista = list(),
+        respuesta=status[1]
     )
 
 @app.route('/about')
@@ -91,8 +141,8 @@ def cargaropen():
         file = files.get('file')
         if file.filename.endswith('.jpg'):             
             img = Image.open(file.stream)
-            pix = img.load()
-            npa = np.array(img)
+            #pix = img.load()
+            npa = np.array(img)            
             npa = cv2.resize(npa, (int(img.size[0]/2), int(img.size[1]/2)))
 
             # Grayscale 
@@ -105,7 +155,7 @@ def cargaropen():
             # Finding Contours 
             # Use a copy of the image e.g. edged.copy() 
             # since findContours alters the image 
-            contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
+            #contours, hierarchy = cv2.findContours(edged, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
   
             #cv2.imshow('Canny Edges After Contouring', edged) 
             cv2.waitKey(0) 
@@ -114,7 +164,7 @@ def cargaropen():
             print(contours)
             # Draw all contours 
             # -1 signifies drawing all contours 
-            cv2.drawContours(edged, contours, -1, (0, 255, 0), 3) 
+            #cv2.drawContours(edged, contours, -1, (0, 255, 0), 3) 
 
 
             img2 = Image.fromarray(edged)

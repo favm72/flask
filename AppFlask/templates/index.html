@@ -17,21 +17,28 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <p>PROCESAR IMAGEN CON PILLOW</p>
         <form method="post" action="/cargar_pillow" enctype="multipart/form-data">
             <input type="file" name="file" id="file" />
             <button type="submit">Cargar</button>
         </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <p>PROCESAR IMAGEN CON OPEN CV</p>
         <form method="post" action="/cargar_opencv" enctype="multipart/form-data">
             <input type="file" name="file" id="file" />
             <button type="submit">Cargar</button>
         </form>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
+        <p>LEER RED NEURONAL</p>
+        <form method="post" action="/readnet" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" />
+            <button type="submit">click me</button>
+        </form>
+    </div>
+    <div class="col-md-3">
         <p>CONSULTA A BASE DE DATOS</p>
         <button type="button" id="btnCheck">
             verificar
