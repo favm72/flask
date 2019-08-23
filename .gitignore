@@ -1,1 +1,4 @@
 env/
+frozen_east_text_detection.pb
+obj/
+AppFlask/__pycache__/

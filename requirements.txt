@@ -10,3 +10,5 @@ pip==19.0.3
 pyodbc==4.0.26
 setuptools==40.8.0
 Werkzeug==0.15.5
+imutils==0.5.3
+pytesseract==0.3.0
