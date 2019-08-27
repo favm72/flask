@@ -31,12 +31,26 @@
     <Compile Include="AppFlask\conexion.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AppFlask\Controller\home_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppFlask\Controller\login_controller.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppFlask\Controller\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AppFlask\Model\login.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="AppFlask\__init__.py" />
     <Compile Include="AppFlask\views.py" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppFlask\" />
+    <Folder Include="AppFlask\Controller\" />
+    <Folder Include="AppFlask\Model\" />
     <Folder Include="AppFlask\static\" />
     <Folder Include="AppFlask\static\content\" />
     <Folder Include="AppFlask\static\fonts\" />
@@ -44,6 +58,7 @@
     <Folder Include="AppFlask\templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppFlask\templates\login.html" />
     <Content Include="requirements.txt" />
     <Content Include="AppFlask\static\content\bootstrap.css" />
     <Content Include="AppFlask\static\content\bootstrap.min.css" />
@@ -76,6 +91,15 @@
     <InterpreterReference Include="Global|VisualStudio|env" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="..\env2\env2\">
+      <Id>env2</Id>
+      <Version>2.7</Version>
+      <Description>env2 (Python 2.7 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="..\env3\env3\">
       <Id>env3</Id>
       <Version>3.7</Version>

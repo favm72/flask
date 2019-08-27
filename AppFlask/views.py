@@ -16,6 +16,8 @@ import cv2
 import time
 from imutils.object_detection  import non_max_suppression
 import pytesseract
+from AppFlask.Controller import login_controller
+from AppFlask.Controller import home_controller
 
 def read_file(request, process):
     files = request.files
@@ -86,17 +88,6 @@ def decode_predictions(scores, geometry):
 			confidences.append(scoresData[x])
 	# return a tuple of the bounding boxes and associated confidences
 	return (rects, confidences)
-@app.route('/')
-@app.route('/home')
-def home():
-    c = Conexion()
-    lista = c.consultar("select * from Federation")   
-    return render_template(
-        'index.html',
-        title='Home Page',
-        year=datetime.now().year,
-        lista = lista
-    )
 
 @app.route('/contact')
 def contact():   
@@ -354,6 +345,29 @@ def about():
         year=datetime.now().year,
         message='Your application description page.'
     )
+
+def resize32(image):
+	(height, width) = image.shape[:2]
+	return cv2.resize(image, (32*int(width/32), 32*int(height/32)))
+
+#TEST
+@app.route('/test', methods=['POST'])
+def test():    
+	def process(file):
+		img = Image.open(file.stream)
+		image = np.array(img)		
+		return resize32(image)
+	status = read_file(request, process)
+	#if status[0]:
+		#return exportar(status[1])
+	return render_template(
+		'index.html',
+		title='AFTER POST',
+		year=datetime.now().year,
+		lista = list(),
+		respuesta=status[1]
+	)
+
 
 #USANDO PILLOW
 @app.route('/cargar_pillow', methods=['POST'])
