@@ -56,9 +56,13 @@
     <Folder Include="AppFlask\static\fonts\" />
     <Folder Include="AppFlask\static\scripts\" />
     <Folder Include="AppFlask\templates\" />
+    <Folder Include="AppFlask\static\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppFlask\templates\login.html" />
+    <Content Include="AppFlask\static\css\asidemenu.css" />
+    <Content Include="AppFlask\static\css\bootstrap.css" />
+    <Content Include="AppFlask\static\css\login.css" />
     <Content Include="requirements.txt" />
     <Content Include="AppFlask\static\content\bootstrap.css" />
     <Content Include="AppFlask\static\content\bootstrap.min.css" />

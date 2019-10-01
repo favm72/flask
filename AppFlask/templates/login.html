@@ -2,16 +2,32 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title>Login</title>
+	<meta charset="utf-8" />
+	<title>Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
-	<div>{{ mensaje }}</div>
-	
-	<form method="post" action="/login" enctype="multipart/form-data">
-		<input type="text" name="user" placeholder="Usuario" />
-		<input type="password" name="pass" placeholder="Password" />
-		<button>Log in</button>
-	</form>	
+	<div class="content-login">
+		<img class="bg-image" src="https://nightwing.stevivor.com/wp-content/uploads/2016/07/S-blue.png" alt="#">
+		<form method="post" class="left" action="/login" enctype="multipart/form-data">
+			<article>
+				<span class="fa fa-user"></span>
+				<input class="input" type="text" Placeholder="Username" name="user" required>
+			</article>
+			<article>
+				<span class="fa fa-lock"></span>
+				<input class="input" type="password" Placeholder="Password" name="pass" required>
+			</article>
+			<section>
+				<a class="small-text" href="#">Forgot password?</a>
+				<button type="submit">Ingresar</button>
+			</section>
+		</form>
+		<div class="divider"></div>
+		<div class="right">
+			<img src="https://nightwing.stevivor.com/wp-content/uploads/2016/07/S-blue.png" alt="#">
+		</div>
+	</div>
 </body>
 </html>
