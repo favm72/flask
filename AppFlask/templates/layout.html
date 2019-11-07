@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,40 +7,122 @@
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/static/content/site.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
+	<style>
+		:root {
+			--widthbar: 260px;
+			--ease: .5s ease;
+		}
+		
+		.master-page{
+			margin:0;
+			padding:0;
+			width: 100%;
+			height: 100vh;
+			overflow: auto;
+			position: relative;
+		}
+
+		.master-page > .side-content{
+			position: fixed;
+			left: 0;
+			top: 0;
+			background: #CCC;
+			width: var(--widthbar);
+			height: 100vh;
+			z-index: 99;
+			overflow: auto;
+			transition: var(--ease);
+		}
+		.master-page > .top-nav{
+			width: calc(100% - var(--widthbar));
+			right: 0;
+			height: 51px;
+			background: #333;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			position:fixed;
+			top:0;
+			right:0;
+			transition: var(--ease);
+		}
+		.master-page > .top-nav .left{
+			display:flex;
+		}
+		.master-page > .top-nav a{
+			text-decoration:none;
+			font-weight:bold;
+			color:white;
+		}
+		.master-page > .all-content{
+			padding: 51px 0 0 var(--widthbar);
+			transition: var(--ease);
+		}		
+		.master-page.min > .side-content{
+			left: -260px;
+			transition: var(--ease);
+		}
+		.master-page.min > .top-nav{
+			width: 100%;
+			transition: var(--ease);
+		}
+		.master-page.min > .all-content{
+			padding: 51px 0 0 0;
+			transition: var(--ease);
+		}
+		.master-page.min > .side-content > .list{
+			left: -260px;
+			transition: var(--ease);
+		}
+	</style>
 </head>
 
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="navbar-brand">Application name</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('home') }}">Home</a></li>
-                    <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+<body style="padding:0">
+	<section class="master-page">
+		<div class="top-nav">
+			<div class="left">
+				<button type="button" onclick="expandme();">
+					<span>-</span>
+				</button>
+				<a href="/" class="navbar-brand">Application name</a>
+			</div>
+			<div class="center">
+				<a href="{{ url_for('home') }}">Login</a>
+			</div>
+			<div class="right">
+				<a href="{{ url_for('home') }}">Login</a>
+			</div>
+		</div>
+		<aside class="side-content">
+			<header>
 
-    <div class="container body-content">
-        {% block content %}{% endblock %}
-        <hr />
-        <footer>
-            <p>&copy; {{ year }} - My Flask Application</p>
-        </footer>
-    </div>
+			</header>
+			<section class="list">
+				<article><a href="{{ url_for('home') }}">Home</a></article>
+				<article><a href="{{ url_for('about') }}">About</a></article>
+				<article><a href="{{ url_for('contact') }}">Contact</a></article>
+			</section>			
+		</aside>
+		<section class="all-content">
+			<div class="container">
+				{% block content %}{% endblock %}
+				<hr />
+				<footer>
+					<p>&copy; {{ year }} - My Flask Application</p>
+				</footer>
+			</div>
+		</section>
+	</section>
 
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
+	<script>
+		function expandme() {
+			let allpage = document.querySelector("section.master-page");
+			allpage.classList.toggle("min");
+		}
+	</script>
     {% block scripts %}{% endblock %}
 
 </body>
