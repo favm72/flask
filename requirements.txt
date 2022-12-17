@@ -5,7 +5,7 @@ Jinja2==2.11.3
 MarkupSafe==1.1.1
 numpy==1.22.0
 opencv-python==4.2.0.32
-Pillow==6.1.0
+Pillow==9.3.0
 pip==21.1
 pyodbc==4.0.26
 setuptools==40.8.0
